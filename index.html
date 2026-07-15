@@ -56,24 +56,29 @@
             <div id="regCodeStage" class="register-stage"><div class="head"><h2>Check your email</h2><p>Enter the six-digit code we sent. It expires after ten minutes.</p></div><div class="otp"><div class="verified"><span id="regCodeEmail"></span><button id="changeRegEmail" class="btn ghost" type="button">Change</button></div><form id="regCodeForm"><label for="regCode">Verification code</label><input id="regCode" class="otp-code" type="text" inputmode="numeric" maxlength="6" autocomplete="one-time-code" required><button id="verifyRegCode" class="btn primary block" type="submit">Verify email</button><div style="text-align:center;margin-top:8px"><button id="resendRegCode" class="btn ghost" type="button">Send another code</button></div><div id="regCodeStatus" class="status"></div></form></div></div>
             <div id="regDetailsStage" class="register-stage"><div class="head"><h2>Complete your registration</h2><p>Your email address will be your username. These saved details will be offered whenever you request access.</p></div><div class="verified"><span>✓ Verified: <strong id="verifiedEmail"></strong></span></div><form id="registrationForm"><div class="grid">
               <div class="field"><label for="fullName">Full name <span class="req">*</span></label><input id="fullName" type="text" autocomplete="name" required></div><div class="field"><label for="contactNumber">Contact number <span class="req">*</span></label><input id="contactNumber" type="tel" autocomplete="tel" required></div>
-              <div class="field full"><label for="company">Company / production <span class="req">*</span></label><input id="company" type="text" required><div class="hint">This can be changed for individual access requests later.</div></div>
+              <div class="field full"><label for="company">Company / production <span class="req">*</span></label><select id="company" required><option value="">Loading productions…</option></select><div class="hint">This can be changed for individual access requests later.</div></div>
               <div class="field full"><label>Will you normally arrive in a vehicle?</label><div class="choices"><div class="choice"><input id="vehicleYes" type="radio" name="vehicleRequired" value="yes"><label for="vehicleYes">Yes, in a vehicle</label></div><div class="choice"><input id="vehicleNo" type="radio" name="vehicleRequired" value="no" checked><label for="vehicleNo">No vehicle</label></div></div></div>
               <div id="vehicleRegField" class="field full hidden"><label for="vehicleReg">Vehicle registration <span class="req">*</span></label><input id="vehicleReg" type="text" maxlength="20" style="text-transform:uppercase"><div class="hint">You can use another vehicle or select no vehicle on a future access request.</div></div>
             </div>
-            <div class="safety"><div class="safety-title"><div class="safety-icon">!</div><div><h3>Mandatory Health, Safety & Site Information</h3><p>Read the site boundaries, restricted areas, access requirements, emergency procedures and safety rules before signing.</p><a id="safetyPdfLink" class="pdf" href="#" target="_blank" rel="noopener">Open the mandatory site information PDF ↗</a></div></div><div class="checkline"><input id="safetyAccepted" type="checkbox"><label for="safetyAccepted">I confirm that I have read, understood and agree to comply with the Mandatory Health, Safety & Site Information. <span class="req">*</span></label></div><div class="grid" style="margin-top:16px"><div class="field"><label for="signature">Typed signature <span class="req">*</span></label><input id="signature" class="signature" type="text" placeholder="Type your full name"></div><div class="field"><label for="signedDate">Date</label><input id="signedDate" type="text" readonly></div></div></div>
+            <div class="safety"><div class="safety-title"><div class="safety-icon">!</div><div><h3>Mandatory Health, Safety &amp; Site Information</h3><p>Read and scroll to the bottom of the document below before signing. The checkbox will unlock once you reach the end.</p><a id="safetyPdfLink" class="pdf" href="assets/mandatory-site-information.pdf" target="_blank" rel="noopener">Open PDF in new tab ↗</a></div></div><div id="safetyScrollWrap" style="border:1px solid #cfdadd;border-radius:10px;margin:12px 0;overflow:hidden;"><div id="safetyScrollDoc" style="height:340px;overflow-y:auto;background:#f8fbfc;padding:14px 16px;font-size:12px;line-height:1.7;color:#29404b;"></div></div><div class="checkline"><input id="safetyAccepted" type="checkbox" disabled style="opacity:0.4"><label for="safetyAccepted" id="safetyAcceptedLabel" style="opacity:0.5">Scroll to the bottom to unlock — I confirm that I have read, understood and agree to comply with the Mandatory Health, Safety &amp; Site Information. <span class="req">*</span></label></div><div class="grid" style="margin-top:16px"><div class="field"><label for="signature">Typed signature <span class="req">*</span></label><input id="signature" class="signature" type="text" placeholder="Type your full name"></div><div class="field"><label for="signedDate">Date</label><input id="signedDate" type="text" readonly></div></div></div>
             <div class="grid" style="margin-top:22px"><div class="field"><label for="newPassword">Create password <span class="req">*</span></label><input id="newPassword" type="password" autocomplete="new-password" required></div><div class="field"><label for="confirmPassword">Confirm password <span class="req">*</span></label><input id="confirmPassword" type="password" autocomplete="new-password" required></div></div><div class="password-note">Use at least 10 characters, including at least one letter and one number.</div><button id="createAccount" class="btn green block" type="submit">Create account and continue</button><div id="registrationStatus" class="status"></div></form></div>
           </div>
           <div id="resetPanel" class="panel auth-card"><div class="head"><h2>Reset your password</h2><p>We will verify your email with a one-time code before allowing a new password.</p></div><div id="resetEmailStage"><form id="resetEmailForm"><label for="resetEmail">Email address</label><div class="row"><input id="resetEmail" type="email" required><button id="sendResetCode" class="btn primary" type="submit">Send code</button></div><div id="resetEmailStatus" class="status"></div></form></div><div id="resetCodeStage" class="hidden"><form id="resetCodeForm"><div class="grid"><div class="field full"><label for="resetCode">Six-digit code</label><input id="resetCode" class="otp-code" type="text" inputmode="numeric" maxlength="6" required></div><div class="field"><label for="resetNewPassword">New password</label><input id="resetNewPassword" type="password" required></div><div class="field"><label for="resetConfirmPassword">Confirm password</label><input id="resetConfirmPassword" type="password" required></div></div><button id="resetSubmit" class="btn green block" type="submit">Reset password</button><div id="resetCodeStatus" class="status"></div></form></div><div style="text-align:center;margin-top:15px"><button id="backToLogin" class="btn ghost" type="button">Back to log in</button></div></div>
         </section>
         <section id="portalShell" class="hidden">
           <div class="portal-top"><div class="welcome"><h2 id="welcomeName">Your site access</h2><p id="welcomeEmail"></p></div><div class="portal-actions"><button id="logoutBtn" class="btn secondary" type="button">Log out</button></div></div>
-          <div class="portal-tabs"><button class="portal-tab active" data-view="request" type="button">Request access</button><button class="portal-tab" data-view="access" type="button">My access dates</button><button class="portal-tab" data-view="account" type="button">Account</button></div>
+          <div class="portal-tabs"><button class="portal-tab active" data-view="request" type="button">Request access</button><button class="portal-tab" data-view="access" type="button">My access dates</button><button class="portal-tab" data-view="passes" type="button">My passes</button><button class="portal-tab" data-view="account" type="button">Account</button></div>
           <div id="requestView" class="portal-view active"><div class="request-layout"><div><div class="head"><h2>Select the exact dates you need</h2><p>Choose individual dates from the calendar. They do not need to form a continuous range.</p></div><div class="calendar"><div class="cal-head"><button id="prevMonth" class="cal-nav" type="button" aria-label="Previous month">‹</button><h3 id="monthTitle"></h3><button id="nextMonth" class="cal-nav" type="button" aria-label="Next month">›</button></div><div class="week"><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div></div><div id="calendarDays" class="days"></div></div><div class="selected-box"><div class="selected-head"><span>Selected access dates</span><button id="clearDates" class="btn ghost" type="button">Clear</button></div><div id="selectedDates" class="chips"><span class="empty">No dates selected yet.</span></div></div></div>
             <div><form id="accessForm"><div class="section-card"><h3>Vehicle</h3><p>Confirm how you will arrive for the selected dates.</p><div id="vehicleOptions" class="option-list"></div><div id="differentVehicleWrap" class="conditional hidden"><label for="accessVehicleReg">Vehicle registration</label><input id="accessVehicleReg" type="text" maxlength="20" style="text-transform:uppercase"><div class="save-default"><input id="saveVehicleDefault" type="checkbox"><label for="saveVehicleDefault">Save this as my default vehicle choice for future requests.</label></div></div></div>
-              <div class="section-card"><h3>Company / production</h3><p>Confirm the company or production linked to this visit.</p><div class="option-list"><div class="option"><input id="companySaved" type="radio" name="companyMode" value="saved" checked><label for="companySaved"><strong id="savedCompanyLabel">Use saved company</strong><span>This is the company held on your account.</span></label></div><div class="option"><input id="companyDifferent" type="radio" name="companyMode" value="different"><label for="companyDifferent"><strong>Use a different company / production</strong><span>Change it for these selected dates.</span></label></div></div><div id="differentCompanyWrap" class="conditional hidden"><label for="accessCompany">Company / production</label><input id="accessCompany" type="text"><div class="save-default"><input id="saveCompanyDefault" type="checkbox"><label for="saveCompanyDefault">Save this as my default company / production.</label></div></div></div>
+              <div class="section-card"><h3>Company / production</h3><p>Confirm the company or production linked to this visit.</p><div class="option-list"><div class="option"><input id="companySaved" type="radio" name="companyMode" value="saved" checked><label for="companySaved"><strong id="savedCompanyLabel">Use saved company</strong><span>This is the company held on your account.</span></label></div><div class="option"><input id="companyDifferent" type="radio" name="companyMode" value="different"><label for="companyDifferent"><strong>Use a different company / production</strong><span>Change it for these selected dates.</span></label></div></div><div id="differentCompanyWrap" class="conditional hidden"><label for="accessCompany">Company / production</label><select id="accessCompany"><option value="">Select production…</option></select><div class="save-default"><input id="saveCompanyDefault" type="checkbox"><label for="saveCompanyDefault">Save this as my default company / production.</label></div></div></div>
               <div class="section-card"><h3>Reason for visit</h3><p>Select the option that best describes your visit.</p><label for="visitReason">Reason for visit <span class="req">*</span></label><select id="visitReason" required><option value="">Select a reason</option><option>Filming or Photography</option><option>Unit Base/Crew Parking</option><option>Tech Recce</option><option>Site Visit</option></select><div id="onsiteContactWrap" class="conditional hidden"><label for="onsiteContact">Who will you be meeting onsite?</label><input id="onsiteContact" type="text" maxlength="120"></div></div>
               <div class="section-card"><div id="requestSummary" class="summary">Select at least one date to continue.</div><button id="submitAccess" class="btn green block" type="submit">Confirm access dates</button><div id="accessStatus" class="status"></div></div></form></div></div></div>
           <div id="accessView" class="portal-view"><div class="head"><h2>My access dates</h2><p>View your confirmed dates, amend the details or cancel future dates you no longer require.</p></div><div id="accessList" class="access-list"></div></div>
+          <div id="passesView" class="portal-view">
+            <h2>My passes</h2>
+            <p style="color:var(--muted);font-size:13px;margin-bottom:16px;">Your entry passes for confirmed access dates. Show these to security on arrival.</p>
+            <div id="passesList"></div>
+          </div>
           <div id="accountView" class="portal-view"><div class="account-grid"><div class="section-card"><h3>Account details</h3><p>Update the default information offered when you request access.</p><form id="accountForm"><div class="grid"><div class="field full"><label>Email address</label><input id="accountEmail" type="email" readonly></div><div class="field full"><label for="accountName">Full name</label><input id="accountName" type="text" required></div><div class="field full"><label for="accountPhone">Contact number</label><input id="accountPhone" type="tel" required></div><div class="field full"><label for="accountCompany">Default company / production</label><input id="accountCompany" type="text" required></div><div class="field full"><label>Default vehicle choice</label><div class="choices"><div class="choice"><input id="accountVehicleYes" type="radio" name="accountVehicle" value="yes"><label for="accountVehicleYes">Vehicle</label></div><div class="choice"><input id="accountVehicleNo" type="radio" name="accountVehicle" value="no"><label for="accountVehicleNo">No vehicle</label></div></div></div><div id="accountVehicleRegWrap" class="field full"><label for="accountVehicleReg">Default vehicle registration</label><input id="accountVehicleReg" type="text" style="text-transform:uppercase"></div></div><button id="saveAccount" class="btn primary block" type="submit">Save account details</button><div id="accountStatus" class="status"></div></form></div>
             <div><div class="section-card"><h3>Health & Safety waiver</h3><p>Your signed induction record is retained separately in the live register.</p><div id="waiverInfo" class="waiver-card"></div><a id="accountPdfLink" class="pdf" href="#" target="_blank" rel="noopener">Read the site information again ↗</a></div><div class="section-card"><h3>Change password</h3><p>Enter your current password before choosing a new one.</p><form id="passwordForm"><div class="grid"><div class="field full"><label for="currentPassword">Current password</label><input id="currentPassword" type="password" required></div><div class="field"><label for="accountNewPassword">New password</label><input id="accountNewPassword" type="password" required></div><div class="field"><label for="accountConfirmPassword">Confirm password</label><input id="accountConfirmPassword" type="password" required></div></div><button id="changePassword" class="btn primary block" type="submit">Change password</button><div id="passwordStatus" class="status"></div></form></div></div></div></div>
         </section>
@@ -88,7 +93,7 @@
         <input id="editAccessId" type="hidden">
         <div id="editAccessDate" class="edit-date"></div>
         <div class="grid">
-          <div class="field full"><label for="editCompany">Company / production <span class="req">*</span></label><input id="editCompany" type="text" required></div>
+          <div class="field full"><label for="editCompany">Company / production <span class="req">*</span></label><select id="editCompany" required><option value="">Select production…</option></select></div>
           <div class="field full"><label for="editVehicleMode">How will you arrive? <span class="req">*</span></label><select id="editVehicleMode"><option value="vehicle">In a vehicle</option><option value="none">No vehicle</option></select></div>
           <div id="editVehicleRegWrap" class="field full"><label for="editVehicleReg">Vehicle registration <span class="req">*</span></label><input id="editVehicleReg" type="text" maxlength="20" style="text-transform:uppercase"></div>
           <div class="field full"><label for="editReason">Reason for visit <span class="req">*</span></label><select id="editReason" required><option value="">Select a reason</option><option>Filming or Photography</option><option>Unit Base/Crew Parking</option><option>Tech Recce</option><option>Site Visit</option></select></div>
@@ -120,7 +125,7 @@ function makePdfUrl(){try{const bytes=Uint8Array.from(atob(PDF_BASE64),c=>c.char
 function showAuth(name){$('authShell').classList.remove('hidden');$('portalShell').classList.add('hidden');$$('.auth-tab').forEach(b=>b.classList.toggle('active',b.dataset.auth===name));['login','register','reset'].forEach(n=>$(n+'Panel').classList.toggle('active',n===name));if(name==='reset')$$('.auth-tab').forEach(b=>b.classList.remove('active'))}
 function regStage(name,step){['Email','Code','Details'].forEach(n=>$('reg'+n+'Stage').classList.toggle('active',n.toLowerCase()===name));$$('.step').forEach((el,i)=>{el.classList.toggle('active',i+1===step);el.classList.toggle('done',i+1<step)})}
 function loadPortal(resp){state.sessionToken=resp.sessionToken||state.sessionToken;localStorage.setItem('lw_session',state.sessionToken);state.profile=resp.data.profile;state.accessRequests=resp.data.accessRequests||[];$('authShell').classList.add('hidden');$('portalShell').classList.remove('hidden');$('welcomeName').textContent='Hello, '+state.profile.fullName.split(' ')[0];$('welcomeEmail').textContent=state.profile.email;populateAccessForm();renderCalendar();renderSelected();renderAccessList();populateAccount();showPortalView('request')}
-function showPortalView(view){$$('.portal-tab').forEach(b=>b.classList.toggle('active',b.dataset.view===view));$$('.portal-view').forEach(v=>v.classList.toggle('active',v.id===view+'View'));if(view==='access')renderAccessList()}
+function showPortalView(view){$$('.portal-tab').forEach(b=>b.classList.toggle('active',b.dataset.view===view));$$('.portal-view').forEach(v=>v.classList.toggle('active',v.id===view+'View'));if(view==='access')renderAccessList();if(view==='passes')renderPasses()}
 function populateAccessForm(){const p=state.profile;$('savedCompanyLabel').textContent='Use '+p.company;$('accessCompany').value='';$('companySaved').checked=true;$('differentCompanyWrap').classList.add('hidden');$('saveCompanyDefault').checked=false;let html='';if(p.vehicleRequired&&p.vehicleReg){html+=`<div class="option"><input id="vehicleSaved" type="radio" name="vehicleMode" value="saved" checked><label for="vehicleSaved"><strong>Use ${escapeHtml(p.vehicleReg)}</strong><span>Your saved vehicle registration.</span></label></div>`;html+=`<div class="option"><input id="vehicleDifferent" type="radio" name="vehicleMode" value="different"><label for="vehicleDifferent"><strong>Use a different vehicle</strong><span>Enter another registration for these dates.</span></label></div>`;html+=`<div class="option"><input id="vehicleNone" type="radio" name="vehicleMode" value="none"><label for="vehicleNone"><strong>No vehicle</strong><span>I will arrive on foot or as a passenger.</span></label></div>`}else{html+=`<div class="option"><input id="vehicleNone" type="radio" name="vehicleMode" value="none" checked><label for="vehicleNone"><strong>No vehicle</strong><span>This is your saved arrival choice.</span></label></div>`;html+=`<div class="option"><input id="vehicleDifferent" type="radio" name="vehicleMode" value="different"><label for="vehicleDifferent"><strong>I will arrive in a vehicle</strong><span>Enter the registration for these dates.</span></label></div>`}$('vehicleOptions').innerHTML=html;$$('input[name=vehicleMode]').forEach(r=>r.addEventListener('change',vehicleModeChanged));$('differentVehicleWrap').classList.add('hidden');$('accessVehicleReg').value='';$('saveVehicleDefault').checked=false;updateSummary()}
 function vehicleModeChanged(){const mode=document.querySelector('input[name=vehicleMode]:checked')?.value;$('differentVehicleWrap').classList.toggle('hidden',mode!=='different');updateSummary()}
 function renderCalendar(){const base=state.calendarMonth;$('monthTitle').textContent=new Intl.DateTimeFormat('en-GB',{month:'long',year:'numeric'}).format(base);const first=new Date(base.getFullYear(),base.getMonth(),1),startOffset=(first.getDay()+6)%7,start=new Date(base.getFullYear(),base.getMonth(),1-startOffset);let html='';for(let i=0;i<42;i++){const d=new Date(start);d.setDate(start.getDate()+i);const k=dateKey(d),other=d.getMonth()!==base.getMonth(),past=k<todayKey(),sel=state.selectedDates.has(k),tod=k===todayKey();html+=`<button type="button" class="day${other?' other':''}${sel?' selected':''}${tod?' today':''}" data-date="${k}" ${past?'disabled':''}>${d.getDate()}</button>`}$('calendarDays').innerHTML=html;$$('.day[data-date]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.date;state.selectedDates.has(k)?state.selectedDates.delete(k):state.selectedDates.add(k);renderCalendar();renderSelected()}));const current=new Date(new Date().getFullYear(),new Date().getMonth(),1);$('prevMonth').disabled=base<=current}
@@ -148,7 +153,166 @@ $('editAccessForm').onsubmit=async e=>{e.preventDefault();const btn=$('saveEditA
 $$('input[name=accountVehicle]').forEach(r=>r.onchange=()=>$('accountVehicleRegWrap').classList.toggle('hidden',!$('accountVehicleYes').checked));$('accountForm').onsubmit=async e=>{e.preventDefault();const btn=$('saveAccount');busy(btn,true,'Saving');try{const r=await server('updateProfile',{sessionToken:state.sessionToken,fullName:$('accountName').value,contactNumber:$('accountPhone').value,company:$('accountCompany').value,vehicleRequired:$('accountVehicleYes').checked,vehicleReg:$('accountVehicleReg').value});state.profile=r.data.profile;state.accessRequests=r.data.accessRequests;populateAccessForm();populateAccount();$('welcomeName').textContent='Hello, '+state.profile.fullName.split(' ')[0];setStatus('accountStatus','success','Your account details have been updated.')}catch(err){setStatus('accountStatus','error',err.message)}finally{busy(btn,false,'Save account details')}};
 $('passwordForm').onsubmit=async e=>{e.preventDefault();const btn=$('changePassword'),p=$('accountNewPassword').value;if(p!==$('accountConfirmPassword').value){setStatus('passwordStatus','error','The two new passwords do not match.');return}busy(btn,true,'Changing');try{const r=await server('changePassword',{sessionToken:state.sessionToken,currentPassword:$('currentPassword').value,newPassword:p});$('passwordForm').reset();setStatus('passwordStatus','success',r.message)}catch(err){setStatus('passwordStatus','error',err.message)}finally{busy(btn,false,'Change password')}};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('editAccessModal').classList.contains('hidden'))closeEditAccess()});$('logoutBtn').onclick=async()=>{try{await server('logout',state.sessionToken)}catch(e){}state.sessionToken='';state.profile=null;localStorage.removeItem('lw_session');showAuth('login');$('portalShell').classList.add('hidden');$('authShell').classList.remove('hidden')};
-async function init(){state.pdfUrl=makePdfUrl();$('safetyPdfLink').href=state.pdfUrl;$('accountPdfLink').href=state.pdfUrl;$('signedDate').value=new Intl.DateTimeFormat('en-GB').format(new Date());if(state.sessionToken){try{const r=await server('getPortalData',state.sessionToken);loadPortal(r);return}catch(e){localStorage.removeItem('lw_session')}}showAuth('login');renderCalendar();renderSelected()}
+// ── H&S scroll-to-unlock ──────────────────────────────────────────────────
+function initSafetyScroll(){
+  var doc = $('safetyScrollDoc');
+  if(!doc) return;
+  // Build plain-text content of the H&S document
+  doc.innerHTML = [
+    '<strong>MANDATORY HEALTH, SAFETY &amp; SITE INFORMATION</strong>',
+    '<strong>980 Great West Road, Brentford, TW8 9GS</strong>',
+    '',
+    '<strong>Welcome</strong>',
+    'Welcome to site. This induction is mandatory for all operatives, contractors, visitors, and personnel working on or visiting the premises.',
+    'The purpose of this induction is to ensure that everyone on site understands the required health, safety, emergency, and operational procedures to maintain a safe working environment.',
+    'All personnel are expected to comply with the instructions contained within this document at all times.',
+    '',
+    '<strong>Primary Site Contacts</strong>',
+    '24-Hour Security: 07927 531871 / 0208 568 0074',
+    'Kenneth Bath: 07725 598279 | Ken.bath@hadleypropertygroup.com',
+    '',
+    '<strong>Site Boundaries &amp; Restricted Areas</strong>',
+    'Site boundaries are clearly identified with fencing, barriers, and warning signage. Access beyond designated boundaries is strictly prohibited unless authorised.',
+    'Certain areas may be designated as restricted due to hazardous activities, high voltage equipment, stored materials, or other risks. Access is permitted only with prior authorisation.',
+    'Always observe warning signs and follow site instructions as Blocks B, C &amp; D have been stripped and returned to Shell and Core.',
+    '',
+    '<strong>Site Access Requirements</strong>',
+    'All operatives and visitors must report to the Security Main Gate House upon arrival.',
+    'Use designated pedestrian walkways at all times. Follow all instructions provided by site security and management.',
+    'Only authorised vehicles are permitted on site. Site speed limit is 10mph. Drivers must remain alert to pedestrians, plant, and ongoing works.',
+    '',
+    '<strong>Site Safety Rules</strong>',
+    'Do not enter any area marked "No Entry" or protected by barriers.',
+    'If unsure whether access is permitted, consult the Site Operations Manager before proceeding.',
+    'Do not alter, damage, or interfere with the building fabric or site infrastructure without authorisation.',
+    'Take extra care in areas with uneven floor surfaces particularly Blocks B, C &amp; D.',
+    'Smoking and vaping are prohibited inside the building.',
+    'Do not drink tap water unless specifically confirmed as potable.',
+    'No lone working.',
+    'No Power or Fire alarm detection or Water in blocks B, C D.',
+    '',
+    '<strong>Fire &amp; Emergency Evacuation Procedures</strong>',
+    'If you discover a fire: 1. Raise the alarm immediately. 2. Evacuate the building using the nearest available fire exit. 3. Notify the 24-Hour Security or Site Operations Manager.',
+    'All personnel must proceed immediately to the designated assembly point 5 upon alarm activation.',
+    'Do not delay evacuation to collect personal belongings, tools, or equipment.',
+    'Do not use passenger lifts during an evacuation.',
+    'Remain at assembly point 5 until instructed otherwise by the Site Operations Manager.',
+    'Do not re-enter the building until permission has been given.',
+    '',
+    '<strong>What Is Expected of You</strong>',
+    'Health and Safety is everyone's responsibility.',
+    'Do not interfere with or misuse any safety equipment or systems.',
+    'Work in accordance with approved Risk Assessments and Method Statements (RAMS).',
+    'Wear all required Personal Protective Equipment (PPE).',
+    'Report any unsafe condition immediately.',
+    'Alcohol and illegal substances are strictly prohibited on site.',
+    'Report all accidents, incidents, hazards, and near misses to the Site Operations Manager immediately.',
+    '',
+    '<strong>Key Health &amp; Safety Legislation</strong>',
+    'The following legislation applies to activities carried out on site:',
+    '• Health &amp; Safety at Work Act',
+    '• Construction (Design and Management) Regulations',
+    '• Lifting Operations and Lifting Equipment Regulations (LOLER)',
+    '• Work at Height Regulations',
+    '• Provision and Use of Work Equipment Regulations (PUWER)',
+    '• Control of Substances Hazardous to Health Regulations (COSHH)',
+    '• Reporting of Injuries, Diseases and Dangerous Occurrences Regulations (RIDDOR)',
+    '• Management of Health &amp; Safety at Work Regulations',
+    '',
+    '<strong>Induction Confirmation</strong>',
+    'By ticking the checkbox below you confirm that you have read, understood, and agree to comply with the contents of this Site Induction.',
+    'Failure to comply with site rules or safety requirements may result in removal from site.',
+  ].map(function(line){ return line ? '<p style="margin:0 0 6px;">'+line+'</p>' : '<br>'; }).join('');
+
+  // Enable checkbox only when scrolled to bottom
+  doc.addEventListener('scroll', function(){
+    var atBottom = doc.scrollHeight - doc.scrollTop <= doc.clientHeight + 30;
+    var cb = $('safetyAccepted');
+    var lbl = $('safetyAcceptedLabel');
+    if(atBottom && cb && cb.disabled){
+      cb.disabled = false;
+      cb.style.opacity = '1';
+      if(lbl){ lbl.style.opacity='1'; lbl.innerHTML = lbl.innerHTML.replace('Scroll to the bottom to unlock — ',''); }
+    }
+  });
+}
+
+// ── Productions dropdown ─────────────────────────────────────────────────
+var productionsList = [];
+
+async function loadProductionsDropdowns() {
+  try {
+    var r = await server('getProductions');
+    productionsList = (r.productions || []).filter(function(p){ return p.status === 'active'; });
+    productionsList.sort(function(a,b){ return a.name.localeCompare(b.name); });
+    populateProductionDropdowns();
+  } catch(e) {
+    console.warn('Could not load productions:', e.message);
+  }
+}
+
+function populateProductionDropdowns() {
+  ['company','accessCompany','editCompany'].forEach(function(id) {
+    var sel = $(id);
+    if (!sel || sel.tagName !== 'SELECT') return;
+    var current = sel.value;
+    sel.innerHTML = '<option value="">Select company / production…</option>'
+      + productionsList.map(function(p){
+          return '<option value="'+escHtml(p.name)+'" data-colour="'+p.colour+'">'
+            + escHtml(p.name) + '</option>';
+        }).join('');
+    if (current) sel.value = current;
+  });
+}
+
+
+// ── My Passes view ───────────────────────────────────────────────────────
+function renderPasses(){
+  var el = $('passesList');
+  if(!el) return;
+  var today = todayKey();
+  var confirmed = (state.accessRequests||[]).filter(function(r){ return r.status==='Confirmed' && r.passSentAt; });
+  confirmed.sort(function(a,b){ return b.date.localeCompare(a.date); });
+
+  if(!confirmed.length){
+    el.innerHTML = '<p style="color:var(--muted);font-size:13px;">No passes have been sent yet. Passes are emailed at 00:01 on each confirmed access date.</p>';
+    return;
+  }
+
+  function fmtDate(k){
+    var parts=k.split('-').map(Number);
+    return new Intl.DateTimeFormat('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date(parts[0],parts[1]-1,parts[2],12));
+  }
+
+  el.innerHTML = confirmed.map(function(r){
+    var isToday = r.date === today;
+    var isPast  = r.date < today;
+    var vehicle = r.vehicleRequired ? r.vehicleReg : 'No vehicle';
+    var passBg  = r.productionColour || (isToday ? '#18794e' : (isPast ? '#6b7b83' : '#14232b'));
+    return '<div style="background:#fff;border:1px solid '+(isToday?'#18794e':'var(--border)')+';border-radius:12px;padding:0;margin-bottom:12px;overflow:hidden;">'
+      + '<div style="background:'+passBg+';padding:12px 18px;display:flex;align-items:center;justify-content:space-between;">'
+      + '<div>'
+      + '<p style="margin:0;font-size:10px;font-weight:700;letter-spacing:0.1em;color:rgba(255,255,255,0.7);text-transform:uppercase;">'+(isToday?'VALID TODAY':'ENTRY PASS')+'</p>'
+      + '<p style="margin:2px 0 0;font-size:16px;font-weight:800;color:#fff;">'+fmtDate(r.date)+'</p>'
+      + '</div>'
+      + (isToday?'<span style="background:rgba(255,255,255,0.2);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;">ACTIVE</span>':'')
+      + '</div>'
+      + '<div style="padding:14px 18px;">'
+      + '<table style="width:100%;font-size:12px;border-collapse:collapse;">'
+      + '<tr><td style="color:#888;padding:4px 0;width:40%;">Name</td><td style="font-weight:700;color:#14232b;">'+escHtml(state.profile.fullName)+'</td></tr>'
+      + '<tr><td style="color:#888;padding:4px 0;">Company</td><td style="font-weight:700;color:#14232b;">'+escHtml(r.company)+'</td></tr>'
+      + '<tr><td style="color:#888;padding:4px 0;">Vehicle</td><td style="font-weight:700;color:#14232b;">'+escHtml(vehicle)+'</td></tr>'
+      + '<tr><td style="color:#888;padding:4px 0;">Site</td><td style="font-weight:700;color:#14232b;">980 Great West Road</td></tr>'
+      + '<tr><td style="color:#888;padding:4px 0;">Ref</td><td style="font-family:monospace;font-size:11px;color:#555;">'+escHtml(r.accessId)+'</td></tr>'
+      + '</table>'
+      + '<p style="margin:10px 0 0;font-size:11px;font-weight:700;color:#18794e;text-align:center;">SHOW THIS PASS TO SECURITY ON ARRIVAL</p>'
+      + '<p style="margin:2px 0 0;font-size:11px;color:#888;text-align:center;">Main Gate House · 980 Great West Road, Brentford, TW8 9GS</p>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+async function init(){state.pdfUrl=makePdfUrl();$('safetyPdfLink').href=state.pdfUrl;$('accountPdfLink').href=state.pdfUrl;initSafetyScroll();loadProductionsDropdowns();$('signedDate').value=new Intl.DateTimeFormat('en-GB').format(new Date());if(state.sessionToken){try{const r=await server('getPortalData',state.sessionToken);loadPortal(r);return}catch(e){localStorage.removeItem('lw_session')}}showAuth('login');renderCalendar();renderSelected()}
 init();
 </script>
 </body>
