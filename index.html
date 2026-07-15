@@ -283,34 +283,92 @@ function renderPasses(){
 
   function fmtDate(k){
     var parts=k.split('-').map(Number);
-    return new Intl.DateTimeFormat('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date(parts[0],parts[1]-1,parts[2],12));
+    return new Intl.DateTimeFormat('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date(parts[0],parts[1]-1,parts[2],12)).toUpperCase();
   }
 
-  el.style.maxWidth='420px';el.style.margin='0 auto';
+  var LW_LOGO  = 'https://jamesplayer85.github.io/980-gwr-signin/assets/location-works-logo-clean.png';
+  var BC_LOGO  = 'https://jamesplayer85.github.io/980-gwr-signin/assets/base-camp-logo-clean.png';
+
+  el.style.maxWidth = '480px';
+  el.style.margin   = '0 auto';
+
   el.innerHTML = confirmed.map(function(r){
-    var isToday = r.date === today;
-    var isPast  = r.date < today;
-    var vehicle = r.vehicleRequired ? r.vehicleReg : 'No vehicle';
-    var passBg  = r.productionColour || (isToday ? '#18794e' : (isPast ? '#6b7b83' : '#14232b'));
-    return '<div style="background:#fff;border:1px solid '+(isToday?'#18794e':'var(--border)')+';border-radius:12px;padding:0;margin-bottom:12px;overflow:hidden;">'
-      + '<div style="background:'+passBg+';padding:12px 18px;display:flex;align-items:center;justify-content:space-between;">'
-      + '<div>'
-      + '<p style="margin:0;font-size:10px;font-weight:700;letter-spacing:0.1em;color:rgba(255,255,255,0.7);text-transform:uppercase;">'+(isToday?'VALID TODAY':'ENTRY PASS')+'</p>'
-      + '<p style="margin:2px 0 0;font-size:16px;font-weight:800;color:#fff;">'+fmtDate(r.date)+'</p>'
+    var vehicle  = r.vehicleRequired ? r.vehicleReg : 'No vehicle';
+    var bg       = r.productionColour || '#18794e';
+    var reason   = r.reason || '';
+    var contact  = r.onsiteContact ? ' \u2014 ' + r.onsiteContact : '';
+    var dateStr  = fmtDate(r.date);
+
+    return '<div style="background:'+bg+';border-radius:16px;overflow:hidden;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.15);">'
+
+      // Logo bar
+      + '<div style="background:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">'
+      + '<img src="'+LW_LOGO+'" alt="Location Works" style="height:44px;width:auto;display:block;">'
+      + '<img src="'+BC_LOGO+'" alt="The Base Camp Co." style="height:40px;width:auto;display:block;">'
       + '</div>'
-      + (isToday?'<span style="background:rgba(255,255,255,0.2);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;">ACTIVE</span>':'')
+
+      // ACCESS GRANTED / ENTRY PASS
+      + '<div style="padding:28px 20px 16px;text-align:center;">'
+      + '<p style="margin:0 0 4px;font-size:12px;font-weight:700;letter-spacing:0.12em;color:rgba(255,255,255,0.8);text-transform:uppercase;">Access Granted</p>'
+      + '<p style="margin:0;font-size:36px;font-weight:900;color:#fff;letter-spacing:-0.01em;line-height:1;">ENTRY PASS</p>'
       + '</div>'
-      + '<div style="padding:14px 18px;">'
-      + '<table style="width:100%;font-size:12px;border-collapse:collapse;">'
-      + '<tr><td style="color:#888;padding:4px 0;width:40%;">Name</td><td style="font-weight:700;color:#14232b;">'+escHtml(state.profile.fullName)+'</td></tr>'
-      + '<tr><td style="color:#888;padding:4px 0;">Company</td><td style="font-weight:700;color:#14232b;">'+escHtml(r.company)+'</td></tr>'
-      + '<tr><td style="color:#888;padding:4px 0;">Vehicle</td><td style="font-weight:700;color:#14232b;">'+escHtml(vehicle)+'</td></tr>'
-      + '<tr><td style="color:#888;padding:4px 0;">Site</td><td style="font-weight:700;color:#14232b;">980 Great West Road</td></tr>'
-      + '<tr><td style="color:#888;padding:4px 0;">Ref</td><td style="font-family:monospace;font-size:11px;color:#555;">'+escHtml(r.accessId)+'</td></tr>'
-      + '</table>'
-      + '<p style="margin:10px 0 0;font-size:11px;font-weight:700;color:#18794e;text-align:center;">SHOW THIS PASS TO SECURITY ON ARRIVAL</p>'
-      + '<p style="margin:2px 0 0;font-size:11px;color:#888;text-align:center;">Main Gate House · 980 Great West Road, Brentford, TW8 9GS</p>'
+
+      // Date pill
+      + '<div style="padding:0 16px 20px;">'
+      + '<div style="background:rgba(255,255,255,0.18);border-radius:12px;padding:16px;text-align:center;">'
+      + '<p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:0.1em;color:rgba(255,255,255,0.75);text-transform:uppercase;">Valid For</p>'
+      + '<p style="margin:0;font-size:20px;font-weight:900;color:#fff;line-height:1.2;">'+dateStr+'</p>'
       + '</div>'
+      + '</div>'
+
+      // Details card
+      + '<div style="margin:0 16px 16px;background:#fff;border-radius:12px;overflow:hidden;">'
+      + '<div style="padding:18px 20px;">'
+
+      // Name
+      + '<div style="padding:0 0 12px;border-bottom:1px solid #eee;">'
+      + '<p style="margin:0 0 2px;font-size:10px;font-weight:700;letter-spacing:0.1em;color:#888;text-transform:uppercase;">Name</p>'
+      + '<p style="margin:0;font-size:17px;font-weight:700;color:#14232b;">'+escHtml(state.profile.fullName)+'</p>'
+      + '</div>'
+
+      // Company
+      + '<div style="padding:12px 0;border-bottom:1px solid #eee;">'
+      + '<p style="margin:0 0 2px;font-size:10px;font-weight:700;letter-spacing:0.1em;color:#888;text-transform:uppercase;">Company / Production</p>'
+      + '<p style="margin:0;font-size:17px;font-weight:700;color:#14232b;">'+escHtml(r.company)+'</p>'
+      + '</div>'
+
+      // Reason
+      + (reason ? '<div style="padding:12px 0;border-bottom:1px solid #eee;">'
+      + '<p style="margin:0 0 2px;font-size:10px;font-weight:700;letter-spacing:0.1em;color:#888;text-transform:uppercase;">Reason for Visit</p>'
+      + '<p style="margin:0;font-size:17px;font-weight:700;color:#14232b;">'+escHtml(reason+contact)+'</p>'
+      + '</div>' : '')
+
+      // Vehicle
+      + '<div style="padding:12px 0;border-bottom:1px solid #eee;">'
+      + '<p style="margin:0 0 2px;font-size:10px;font-weight:700;letter-spacing:0.1em;color:#888;text-transform:uppercase;">Vehicle Registration</p>'
+      + '<p style="margin:0;font-size:17px;font-weight:700;color:#14232b;">'+escHtml(vehicle)+'</p>'
+      + '</div>'
+
+      // Site
+      + '<div style="padding:12px 0 0;">'
+      + '<p style="margin:0 0 2px;font-size:10px;font-weight:700;letter-spacing:0.1em;color:#888;text-transform:uppercase;">Site</p>'
+      + '<p style="margin:0;font-size:17px;font-weight:700;color:#14232b;">980 Great West Road</p>'
+      + '</div>'
+
+      + '</div>'
+
+      // Pass ref bar
+      + '<div style="background:#eef7f2;padding:10px 20px;border-top:1px solid #ddeee6;">'
+      + '<p style="margin:0;font-size:12px;font-weight:700;color:#235c43;">PASS REF: '+escHtml(r.accessId)+'</p>'
+      + '</div>'
+      + '</div>'
+
+      // Footer
+      + '<div style="padding:16px 20px 24px;text-align:center;">'
+      + '<p style="margin:0 0 4px;font-size:13px;font-weight:900;color:#fff;letter-spacing:0.04em;">SHOW THIS PASS TO SECURITY ON ARRIVAL</p>'
+      + '<p style="margin:0;font-size:12px;color:rgba(255,255,255,0.75);">Main Gate House \u00b7 980 Great West Road, Brentford, TW8 9GS</p>'
+      + '</div>'
+
       + '</div>';
   }).join('');
 }
